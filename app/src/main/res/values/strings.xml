@@ -5,7 +5,7 @@
     <string name="rqdmv_price">£%1$.2f</string>
 
     <!-- top bar titles -->
-    <string name="rqdmv_top_bar_home_title">Home/App Title</string>
+    <string name="rqdmv_top_bar_home_title">Saxby Home Relay</string>
     <string name="rqdmv_top_bar_cart_title">Cart</string>
     <string name="rqdmv_top_bar_checkout_title">Checkout</string>
     <string name="rqdmv_top_bar_orders_title">Orders</string>
@@ -19,7 +19,7 @@
     <string name="rqdmv_bottom_bar_nav_item_settings_title">Settings</string>
 
     <!-- onboarding screen -->
-    <string name="rqdmv_page_1_title">Strategic Planning</string>
+    <string name="rqdmv_page_1_title">Make home feel effortless</string>
     <string name="rqdmv_page_2_title">Operational Excellence</string>
     <string name="rqdmv_page_3_title">Change Management</string>
     <string name="rqdmv_page_1_description">Comprehensive strategic analysis and planning that aligns your business objectives with market opportunities and organizational capabilities.</string>
@@ -64,9 +64,14 @@
     <string name="rqdmv_settings_screen_company_label">Company</string>
     <string name="rqdmv_settings_screen_version_label">Version</string>
     <string name="rqdmv_settings_screen_customer_support_label">Customer Support</string>
-    <string name="rqdmv_company_name">Company Name</string>
+    <string name="rqdmv_company_name">SAXBY BRANDS LTD</string>
     <string name="rqdmv_app_version">1.0.0</string>
-    <string name="rqdmv_customer_support_link">https://website.org/</string>
+    <string name="rqdmv_customer_support_link">https://saxbybrands.casa</string>
+    <string name="rqdmv_category_kitchen">Kitchen</string>
+    <string name="rqdmv_category_cleaning">Cleaning</string>
+    <string name="rqdmv_category_comfort">Comfort</string>
+    <string name="rqdmv_category_lighting">Lighting</string>
+    <string name="rqdmv_category_storage">Storage</string>
 
     <!-- clear cart dialog -->
     <string name="rqdmv_clear_cart_dialog_title">Clear cart?</string>

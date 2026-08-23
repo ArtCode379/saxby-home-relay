@@ -18,24 +18,19 @@ import androidx.compose.ui.unit.dp
 import saxbybrands.housewares.saxbyhomerelay.R
 
 @Composable
-fun ClearCartDialog(
-    modifier: Modifier = Modifier,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit,
-) {
+fun ClearCartDialog(modifier: Modifier = Modifier, onConfirm: () -> Unit, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(
                 onClick = onConfirm,
-                colors = ButtonDefaults.textButtonColors(
-                    contentColor = MaterialTheme.colorScheme.error
-                )
+                colors =
+                    ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
             ) {
                 Text(
                     text = stringResource(R.string.rqdmv_button_confirm_clear_cart),
                     style = MaterialTheme.typography.labelLarge,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
                 )
             }
         },
@@ -44,7 +39,7 @@ fun ClearCartDialog(
                 Text(
                     text = stringResource(R.string.rqdmv_button_cancel_clear_cart),
                     style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
             }
         },
@@ -52,14 +47,14 @@ fun ClearCartDialog(
             Text(
                 text = stringResource(R.string.rqdmv_clear_cart_dialog_title),
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
             )
         },
         text = {
             Text(
                 text = stringResource(R.string.rqdmv_clear_card_dialog_text),
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
             )
         },
         icon = {
@@ -67,11 +62,11 @@ fun ClearCartDialog(
                 imageVector = Icons.Default.DeleteSweep,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.error,
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(32.dp),
             )
         },
         shape = RoundedCornerShape(12.dp),
         containerColor = MaterialTheme.colorScheme.surface,
-        modifier = modifier
+        modifier = modifier,
     )
 }

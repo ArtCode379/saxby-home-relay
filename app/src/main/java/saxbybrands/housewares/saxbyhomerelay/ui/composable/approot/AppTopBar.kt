@@ -18,14 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
+import kotlin.reflect.KClass
 import saxbybrands.housewares.saxbyhomerelay.R
 import saxbybrands.housewares.saxbyhomerelay.ui.composable.navigation.NavRoute
-import kotlin.reflect.KClass
 
-private val canNavigateBackRoutes: List<KClass<out NavRoute>> = listOf(
-    NavRoute.ProductDetails::class,
-    NavRoute.Checkout::class,
-)
+private val canNavigateBackRoutes: List<KClass<out NavRoute>> =
+    listOf(NavRoute.ProductDetails::class, NavRoute.Checkout::class)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,31 +37,21 @@ fun AppTopBar(
     val canNavigateBack = currentDestination.matchesAnyRoute(canNavigateBackRoutes)
 
     TopAppBar(
-        title = {
-            Text(
-                text = getTitle(currentDestination)?.let { stringResource(it) }.orEmpty()
-            )
-        },
-
+        title = { Text(text = getTitle(currentDestination)?.let { stringResource(it) }.orEmpty()) },
         actions = {
             if (isCartScreen) {
-                IconButton(
-                    onClick = { onClearCartIconClick() },
-                    enabled = isCartNotEmpty,
-                ) {
+                IconButton(onClick = { onClearCartIconClick() }, enabled = isCartNotEmpty) {
                     Icon(
                         imageVector = Icons.Default.Delete,
                         contentDescription = "Clear Cart",
                         modifier = Modifier.size(24.dp),
-                        tint = if (isCartNotEmpty)
-                            MaterialTheme.colorScheme.onPrimary
-                        else
-                            MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
+                        tint =
+                            if (isCartNotEmpty) MaterialTheme.colorScheme.onPrimary
+                            else MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
                     )
                 }
             }
         },
-
         navigationIcon = {
             if (canNavigateBack) {
                 IconButton(onClick = onNavigateBack) {
@@ -75,11 +63,11 @@ fun AppTopBar(
                 }
             }
         },
-
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            titleContentColor = MaterialTheme.colorScheme.onPrimary,
-        ),
+        colors =
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                titleContentColor = MaterialTheme.colorScheme.onPrimary,
+            ),
     )
 }
 

@@ -9,11 +9,7 @@ import saxbybrands.housewares.saxbyhomerelay.data.database.converter.Converters
 import saxbybrands.housewares.saxbyhomerelay.data.entity.CartItemEntity
 import saxbybrands.housewares.saxbyhomerelay.data.entity.OrderEntity
 
-@Database(
-    entities = [CartItemEntity::class, OrderEntity::class],
-    version = 1,
-    exportSchema = false
-)
+@Database(entities = [CartItemEntity::class, OrderEntity::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class RQDMVDatabase : RoomDatabase() {
 

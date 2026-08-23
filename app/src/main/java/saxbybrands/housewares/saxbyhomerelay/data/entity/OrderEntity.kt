@@ -10,8 +10,8 @@ data class OrderEntity(
     @PrimaryKey @ColumnInfo(name = "order_number") val orderNumber: String,
 
     /**
-     * Normally contains a list of products in the form: ItemA x 1, ItemB x 3, ItemC x 2, etc.
-     * It may contain any other content as well.
+     * Normally contains a list of products in the form: ItemA x 1, ItemB x 3, ItemC x 2, etc. It
+     * may contain any other content as well.
      */
     val description: String,
     @ColumnInfo(name = "customer_first_name") val customerFirstName: String,

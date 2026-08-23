@@ -11,17 +11,12 @@ private const val RQDMV_PREFS_NAME = "rqdmv_prefs"
 
 val Context.rqdmvOnboardingStore by preferencesDataStore(name = RQDMV_PREFS_NAME)
 
-class RQDMVOnboardingPrefs(
-    private val context: Context
-) {
-    val onboardedStateFlow: Flow<Boolean?> = context.rqdmvOnboardingStore.data.map { prefs ->
-        prefs[ONBOARDED_STATE_KEY]
-    }
+class RQDMVOnboardingPrefs(private val context: Context) {
+    val onboardedStateFlow: Flow<Boolean?> =
+        context.rqdmvOnboardingStore.data.map { prefs -> prefs[ONBOARDED_STATE_KEY] }
 
     suspend fun setOnboardedState(state: Boolean) {
-        context.rqdmvOnboardingStore.edit { prefs ->
-            prefs[ONBOARDED_STATE_KEY] = state
-        }
+        context.rqdmvOnboardingStore.edit { prefs -> prefs[ONBOARDED_STATE_KEY] = state }
     }
 
     companion object {

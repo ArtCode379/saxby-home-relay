@@ -2,15 +2,15 @@ package saxbybrands.housewares.saxbyhomerelay.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import saxbybrands.housewares.saxbyhomerelay.data.model.Product
-import saxbybrands.housewares.saxbyhomerelay.data.repository.CartRepository
-import saxbybrands.housewares.saxbyhomerelay.data.repository.ProductRepository
-import saxbybrands.housewares.saxbyhomerelay.ui.state.DataUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import saxbybrands.housewares.saxbyhomerelay.data.model.Product
+import saxbybrands.housewares.saxbyhomerelay.data.repository.CartRepository
+import saxbybrands.housewares.saxbyhomerelay.data.repository.ProductRepository
+import saxbybrands.housewares.saxbyhomerelay.ui.state.DataUiState
 
 class ProductViewModel(
     private val productRepository: ProductRepository,

@@ -42,46 +42,40 @@ fun AppBottomBar(
         navigationItems.forEach { item ->
             NavigationBarItem(
                 selected = isSelectedDestination(currentDestination, item.route),
-
                 onClick = { onNavigateToRoute(item) },
-
                 icon = {
                     if (item.route == NavRoute.Cart) {
                         BadgedBox(
                             badge = {
                                 if (itemsInCart > 0) {
-                                    Badge {
-                                        Text(itemsInCart.toString())
-                                    }
+                                    Badge { Text(itemsInCart.toString()) }
                                 }
                             }
                         ) {
                             Icon(
                                 imageVector = item.icon,
                                 contentDescription = stringResource(item.titleRes),
-                                modifier = Modifier.size(25.dp)
+                                modifier = Modifier.size(25.dp),
                             )
                         }
                     } else {
                         Icon(
                             imageVector = item.icon,
                             contentDescription = stringResource(item.titleRes),
-                            modifier = Modifier.size(25.dp)
+                            modifier = Modifier.size(25.dp),
                         )
                     }
                 },
-
-                label = {
-                    Text(text = stringResource(item.titleRes))
-                },
-
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    indicatorColor = Color.Transparent,
-                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
-                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
-                )
+                label = { Text(text = stringResource(item.titleRes)) },
+                colors =
+                    NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                        selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                        indicatorColor = Color.Transparent,
+                        unselectedIconColor =
+                            MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
+                        unselectedTextColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
+                    ),
             )
         }
     }

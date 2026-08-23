@@ -1,9 +1,9 @@
 package saxbybrands.housewares.saxbyhomerelay.data.repository
 
-import saxbybrands.housewares.saxbyhomerelay.data.datastore.RQDMVOnboardingPrefs
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import saxbybrands.housewares.saxbyhomerelay.data.datastore.RQDMVOnboardingPrefs
 
 class RQDMVOnboardingRepo(
     private val rqdmvOnboardingStoreManager: RQDMVOnboardingPrefs,
@@ -15,8 +15,6 @@ class RQDMVOnboardingRepo(
     }
 
     suspend fun setOnboardingState(state: Boolean) {
-        withContext(coroutineDispatcher) {
-            rqdmvOnboardingStoreManager.setOnboardedState(state)
-        }
+        withContext(coroutineDispatcher) { rqdmvOnboardingStoreManager.setOnboardedState(state) }
     }
 }

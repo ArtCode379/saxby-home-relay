@@ -5,33 +5,27 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import kotlinx.coroutines.flow.Flow
 import saxbybrands.housewares.saxbyhomerelay.data.entity.CartItemEntity
 import saxbybrands.housewares.saxbyhomerelay.data.model.Product
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartItemDao {
 
-    @Query("SELECT * FROM cart_items")
-    fun observeAll(): Flow<List<CartItemEntity>>
+    @Query("SELECT * FROM cart_items") fun observeAll(): Flow<List<CartItemEntity>>
 
     @Query("SELECT * FROM cart_items WHERE id = :id")
     fun observeById(id: Int): Flow<CartItemEntity?>
 
-    @Query("SELECT * FROM cart_items")
-    suspend fun getAll(): List<CartItemEntity>
+    @Query("SELECT * FROM cart_items") suspend fun getAll(): List<CartItemEntity>
 
-    @Query("SELECT * FROM cart_items WHERE id = :id")
-    suspend fun getById(id: Int): CartItemEntity?
+    @Query("SELECT * FROM cart_items WHERE id = :id") suspend fun getById(id: Int): CartItemEntity?
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun save(cartItemEntity: CartItemEntity)
+    @Insert(onConflict = OnConflictStrategy.IGNORE) suspend fun save(cartItemEntity: CartItemEntity)
 
-    @Query("DELETE FROM cart_items WHERE id = :id")
-    suspend fun deleteById(id: Int)
+    @Query("DELETE FROM cart_items WHERE id = :id") suspend fun deleteById(id: Int)
 
-    @Query("DELETE FROM cart_items")
-    suspend fun deleteAll()
+    @Query("DELETE FROM cart_items") suspend fun deleteAll()
 
     @Query("UPDATE cart_items SET quantity = quantity + 1 WHERE id = :productId")
     suspend fun incrementQuantity(productId: Int): Int
@@ -41,12 +35,7 @@ interface CartItemDao {
         val updated = incrementQuantity(product.id)
 
         if (updated == 0) {
-            save(
-                CartItemEntity(
-                    id = product.id,
-                    quantity = 1,
-                )
-            )
+            save(CartItemEntity(id = product.id, quantity = 1))
         }
     }
 

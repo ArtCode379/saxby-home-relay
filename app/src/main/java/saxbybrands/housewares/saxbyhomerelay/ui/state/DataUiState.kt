@@ -3,6 +3,7 @@ package saxbybrands.housewares.saxbyhomerelay.ui.state
 sealed class DataUiState<out T> {
 
     object Initial : DataUiState<Nothing>()
+
     object Empty : DataUiState<Nothing>()
 
     data class Populated<T : Any>(val data: T) : DataUiState<T>()

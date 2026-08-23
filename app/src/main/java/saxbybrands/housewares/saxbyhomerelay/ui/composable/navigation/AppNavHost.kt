@@ -1,14 +1,14 @@
 package saxbybrands.housewares.saxbyhomerelay.ui.composable.navigation
 
-//[COMMON][import_fillMaxSize]
+// [COMMON][import_fillMaxSize]
+// [COMMON][import_DetailsScreen]
+// [COMMON][import_PrepScreen]
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-//[COMMON][import_DetailsScreen]
-//[COMMON][import_PrepScreen]
 import saxbybrands.housewares.saxbyhomerelay.ui.composable.screen.cart.CartScreen
 import saxbybrands.housewares.saxbyhomerelay.ui.composable.screen.checkout.CheckoutScreen
 import saxbybrands.housewares.saxbyhomerelay.ui.composable.screen.home.HomeScreen
@@ -19,37 +19,30 @@ import saxbybrands.housewares.saxbyhomerelay.ui.composable.screen.settings.Setti
 import saxbybrands.housewares.saxbyhomerelay.ui.composable.screen.splash.SplashScreen
 
 @Composable
-fun AppNavHost(
-    navController: NavHostController,
-    modifier: Modifier = Modifier,
-) {
+fun AppNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
         startDestination = NavRoute.Splash,
         modifier = modifier,
     ) {
-        //[COMMON][PrepComposable]
+        // [COMMON][PrepComposable]
 
-        //[COMMON][DetailsComposable]
+        // [COMMON][DetailsComposable]
 
         composable<NavRoute.Splash> {
             SplashScreen(
                 onNavigateToHomeScreen = {
                     navController.navigate(route = NavRoute.Home) {
-                        popUpTo(navController.graph.startDestinationId) {
-                            inclusive = true
-                        }
+                        popUpTo(navController.graph.startDestinationId) { inclusive = true }
                         launchSingleTop = true
                     }
                 },
                 onNavigateToOnboarding = {
                     navController.navigate(route = NavRoute.Onboarding) {
-                        popUpTo(navController.graph.startDestinationId) {
-                            inclusive = true
-                        }
+                        popUpTo(navController.graph.startDestinationId) { inclusive = true }
                         launchSingleTop = true
                     }
-                }
+                },
             )
         }
 
@@ -57,9 +50,7 @@ fun AppNavHost(
             OnboardingScreen(
                 onNavigateToHomeScreen = {
                     navController.navigate(NavRoute.Home) {
-                        popUpTo(NavRoute.Onboarding) {
-                            inclusive = true
-                        }
+                        popUpTo(NavRoute.Onboarding) { inclusive = true }
                         launchSingleTop = true
                     }
                 }
@@ -69,26 +60,18 @@ fun AppNavHost(
         composable<NavRoute.Home> {
             HomeScreen(
                 onNavigateToProductDetails = { id: Int ->
-                    navController.navigate(
-                        route = NavRoute.ProductDetails(id = id)
-                    )
+                    navController.navigate(route = NavRoute.ProductDetails(id = id))
                 }
             )
         }
 
         composable<NavRoute.ProductDetails> { backStackEntry ->
             val productDetails: NavRoute.ProductDetails = backStackEntry.toRoute()
-            ProductDetailsScreen(
-                productId = productDetails.id,
-            )
+            ProductDetailsScreen(productId = productDetails.id)
         }
 
         composable<NavRoute.Cart> {
-            CartScreen(
-                onNavigateToCheckoutScreen = {
-                    navController.navigate(NavRoute.Checkout)
-                }
-            )
+            CartScreen(onNavigateToCheckoutScreen = { navController.navigate(NavRoute.Checkout) })
         }
 
         composable<NavRoute.Checkout> {
@@ -101,12 +84,8 @@ fun AppNavHost(
             )
         }
 
-        composable<NavRoute.Orders> {
-            OrdersScreen()
-        }
+        composable<NavRoute.Orders> { OrdersScreen() }
 
-        composable<NavRoute.Settings> {
-            SettingsScreen()
-        }
+        composable<NavRoute.Settings> { SettingsScreen() }
     }
 }

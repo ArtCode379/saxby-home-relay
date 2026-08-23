@@ -2,15 +2,15 @@ package saxbybrands.housewares.saxbyhomerelay.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import saxbybrands.housewares.saxbyhomerelay.data.repository.CartRepository
-import saxbybrands.housewares.saxbyhomerelay.data.repository.ProductRepository
-import saxbybrands.housewares.saxbyhomerelay.ui.state.CartItemUiState
-import saxbybrands.housewares.saxbyhomerelay.ui.state.DataUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import saxbybrands.housewares.saxbyhomerelay.data.repository.CartRepository
+import saxbybrands.housewares.saxbyhomerelay.data.repository.ProductRepository
+import saxbybrands.housewares.saxbyhomerelay.ui.state.CartItemUiState
+import saxbybrands.housewares.saxbyhomerelay.ui.state.DataUiState
 
 class CartViewModel(
     private val cartRepository: CartRepository,
@@ -31,46 +31,40 @@ class CartViewModel(
 
     private fun observeCartItems() {
         viewModelScope.launch {
-            combine(
-                cartRepository.observeAll(),
-                productRepository.observeAll()
-            ) { cartItems, products ->
+            combine(cartRepository.observeAll(), productRepository.observeAll()) {
+                    cartItems,
+                    products ->
+                    val productsMap = products.associateBy { it.id }
 
-                val productsMap = products.associateBy { it.id }
+                    val uiItems =
+                        cartItems.mapNotNull { cartItem ->
+                            productsMap[cartItem.id]?.let { product ->
+                                CartItemUiState(
+                                    productId = product.id,
+                                    productTitle = product.title,
+                                    productPrice = product.price,
+                                    quantity = cartItem.quantity,
+                                    productImageUrl = product.imageUrl,
+                                )
+                            }
+                        }
 
-                val uiItems = cartItems.mapNotNull { cartItem ->
-                    productsMap[cartItem.id]?.let { product ->
-                        CartItemUiState(
-                            productId = product.id,
-                            productTitle = product.title,
-                            productPrice = product.price,
-                            quantity = cartItem.quantity,
-                            productImageUrl = product.imageUrl,
-                        )
+                    if (uiItems.isEmpty()) DataUiState.Empty
+                    else {
+                        _totalPrice.value = calculateTotalPrice(uiItems)
+                        DataUiState.Populated(uiItems)
                     }
                 }
-
-                if (uiItems.isEmpty()) DataUiState.Empty
-                else {
-                    _totalPrice.value = calculateTotalPrice(uiItems)
-                    DataUiState.Populated(uiItems)
-                }
-            }.collect { state ->
-                _cartItemsState.value = state
-            }
+                .collect { state -> _cartItemsState.value = state }
         }
     }
 
     fun incrementProductInCart(productId: Int) {
-        viewModelScope.launch {
-            cartRepository.incrementQuantity(productId)
-        }
+        viewModelScope.launch { cartRepository.incrementQuantity(productId) }
     }
 
     fun deleteFromCart(productId: Int) {
-        viewModelScope.launch {
-            cartRepository.deleteById(productId)
-        }
+        viewModelScope.launch { cartRepository.deleteById(productId) }
     }
 
     fun decrementItemInCart(productId: Int) {
@@ -81,7 +75,6 @@ class CartViewModel(
         }
     }
 
-    private fun calculateTotalPrice(items: List<CartItemUiState>): Double = items.sumOf { item ->
-        item.productPrice * item.quantity
-    }
+    private fun calculateTotalPrice(items: List<CartItemUiState>): Double =
+        items.sumOf { item -> item.productPrice * item.quantity }
 }

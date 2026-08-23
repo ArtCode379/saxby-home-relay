@@ -12,15 +12,9 @@ object DispatchersQualifiers {
 }
 
 val dispatcherModule = module {
-    single<CoroutineDispatcher>(DispatchersQualifiers.IO) {
-        Dispatchers.IO
-    }
+    single<CoroutineDispatcher>(DispatchersQualifiers.IO) { Dispatchers.IO }
 
-    single<CoroutineDispatcher>(DispatchersQualifiers.Default) {
-        Dispatchers.Default
-    }
+    single<CoroutineDispatcher>(DispatchersQualifiers.Default) { Dispatchers.Default }
 
-    single<CoroutineDispatcher>(DispatchersQualifiers.Main) {
-        Dispatchers.Main
-    }
+    single<CoroutineDispatcher>(DispatchersQualifiers.Main) { Dispatchers.Main }
 }

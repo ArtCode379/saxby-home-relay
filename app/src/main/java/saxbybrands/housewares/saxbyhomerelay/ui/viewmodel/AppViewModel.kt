@@ -2,19 +2,16 @@ package saxbybrands.housewares.saxbyhomerelay.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import saxbybrands.housewares.saxbyhomerelay.data.repository.CartRepository
-import saxbybrands.housewares.saxbyhomerelay.ui.state.DataUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import saxbybrands.housewares.saxbyhomerelay.data.repository.CartRepository
+import saxbybrands.housewares.saxbyhomerelay.ui.state.DataUiState
 
-class AppViewModel(
-    private val cartRepository: CartRepository,
-) : ViewModel() {
-    private val _cartPopulatedState =
-        MutableStateFlow<DataUiState<Unit>>(DataUiState.Initial)
+class AppViewModel(private val cartRepository: CartRepository) : ViewModel() {
+    private val _cartPopulatedState = MutableStateFlow<DataUiState<Unit>>(DataUiState.Initial)
     val cartPopulatedState: StateFlow<DataUiState<Unit>>
         get() = _cartPopulatedState.asStateFlow()
 
@@ -42,8 +39,6 @@ class AppViewModel(
     }
 
     fun clearCart() {
-        viewModelScope.launch {
-            cartRepository.deleteAll()
-        }
+        viewModelScope.launch { cartRepository.deleteAll() }
     }
 }

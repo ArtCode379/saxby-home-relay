@@ -6,18 +6,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import saxbybrands.housewares.saxbyhomerelay.data.entity.OrderEntity
-import saxbybrands.housewares.saxbyhomerelay.data.repository.CartRepository
-import saxbybrands.housewares.saxbyhomerelay.data.repository.OrderRepository
-import saxbybrands.housewares.saxbyhomerelay.data.repository.ProductRepository
-import saxbybrands.housewares.saxbyhomerelay.ui.state.DataUiState
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
+import saxbybrands.housewares.saxbyhomerelay.data.entity.OrderEntity
+import saxbybrands.housewares.saxbyhomerelay.data.repository.CartRepository
+import saxbybrands.housewares.saxbyhomerelay.data.repository.OrderRepository
+import saxbybrands.housewares.saxbyhomerelay.data.repository.ProductRepository
+import saxbybrands.housewares.saxbyhomerelay.ui.state.DataUiState
 
 class CheckoutViewModel(
     private val cartRepository: CartRepository,
@@ -60,15 +60,16 @@ class CheckoutViewModel(
         viewModelScope.launch {
             if (isEmailValid()) {
                 _emailInvalidState.update { false }
-                val order = OrderEntity(
-                    orderNumber = generateOrderNumber(),
-                    description = formOrderDescription(),
-                    customerFirstName = customerFirstName,
-                    customerLastName = customerLastName,
-                    customerEmail = customerEmail,
-                    price = calculateOrderPrice(),
-                    timestamp = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES),
-                )
+                val order =
+                    OrderEntity(
+                        orderNumber = generateOrderNumber(),
+                        description = formOrderDescription(),
+                        customerFirstName = customerFirstName,
+                        customerLastName = customerLastName,
+                        customerEmail = customerEmail,
+                        price = calculateOrderPrice(),
+                        timestamp = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES),
+                    )
 
                 orderRepository.save(order)
                 cartRepository.deleteAll()
@@ -85,9 +86,7 @@ class CheckoutViewModel(
 
     private fun generateOrderNumber(): String {
         val chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        return (1..8)
-            .map { chars.random() }
-            .joinToString("")
+        return (1..8).map { chars.random() }.joinToString("")
     }
 
     private suspend fun formOrderDescription(): String {

@@ -29,12 +29,7 @@ fun RQDMVEmptyView(
         verticalArrangement = Arrangement.spacedBy(5.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        icon?.let {
-            Image(
-                painter = it,
-                contentDescription = iconContentDescription,
-            )
-        }
+        icon?.let { Image(painter = it, contentDescription = iconContentDescription) }
 
         Text(
             text = primaryText,

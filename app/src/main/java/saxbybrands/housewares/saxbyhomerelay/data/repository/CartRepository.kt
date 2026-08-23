@@ -1,11 +1,11 @@
 package saxbybrands.housewares.saxbyhomerelay.data.repository
 
-import saxbybrands.housewares.saxbyhomerelay.data.dao.CartItemDao
-import saxbybrands.housewares.saxbyhomerelay.data.entity.CartItemEntity
-import saxbybrands.housewares.saxbyhomerelay.data.model.Product
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import saxbybrands.housewares.saxbyhomerelay.data.dao.CartItemDao
+import saxbybrands.housewares.saxbyhomerelay.data.entity.CartItemEntity
+import saxbybrands.housewares.saxbyhomerelay.data.model.Product
 
 class CartRepository(
     private val cartItemDao: CartItemDao,
@@ -21,32 +21,22 @@ class CartRepository(
     }
 
     suspend fun deleteById(id: Int) {
-        withContext(coroutineDispatcher) {
-            cartItemDao.deleteById(id)
-        }
+        withContext(coroutineDispatcher) { cartItemDao.deleteById(id) }
     }
 
     suspend fun deleteAll() {
-        withContext(coroutineDispatcher) {
-            cartItemDao.deleteAll()
-        }
+        withContext(coroutineDispatcher) { cartItemDao.deleteAll() }
     }
 
     suspend fun incrementQuantity(productId: Int) {
-        withContext(coroutineDispatcher) {
-            cartItemDao.incrementQuantity(productId)
-        }
+        withContext(coroutineDispatcher) { cartItemDao.incrementQuantity(productId) }
     }
 
     suspend fun incrementProductQuantityOrAdd(product: Product) {
-        withContext(coroutineDispatcher) {
-            cartItemDao.incrementProductQuantityOrAdd(product)
-        }
+        withContext(coroutineDispatcher) { cartItemDao.incrementProductQuantityOrAdd(product) }
     }
 
     suspend fun decrementProductQuantityOrRemove(product: Product) {
-        withContext(coroutineDispatcher) {
-            cartItemDao.decrementProductQuantityOrRemove(product)
-        }
+        withContext(coroutineDispatcher) { cartItemDao.decrementProductQuantityOrRemove(product) }
     }
 }

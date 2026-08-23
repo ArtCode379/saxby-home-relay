@@ -14,9 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import saxbybrands.housewares.saxbyhomerelay.R
 
 @Composable
-fun CheckoutDialog(
-    onConfirm: () -> Unit,
-) {
+fun CheckoutDialog(onConfirm: () -> Unit) {
     AlertDialog(
         onDismissRequest = onConfirm,
         confirmButton = {
@@ -28,7 +26,7 @@ fun CheckoutDialog(
             Text(
                 text = stringResource(id = R.string.rqdmv_checkout_dialog_title),
                 style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
         },
         text = {
@@ -36,20 +34,16 @@ fun CheckoutDialog(
                 Text(
                     text = stringResource(id = R.string.rqdmv_checkout_success_message),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
             }
         },
-        containerColor = MaterialTheme.colorScheme.surface
+        containerColor = MaterialTheme.colorScheme.surface,
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun CheckoutDialogPreview() {
-    MaterialTheme {
-        CheckoutDialog(
-            onConfirm = {}
-        )
-    }
+    MaterialTheme { CheckoutDialog(onConfirm = {}) }
 }
